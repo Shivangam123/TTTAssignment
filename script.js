@@ -19,14 +19,16 @@ let winningOption = [
 ];
 let arr=[false,false,false,false,false,false,false,false,false];
 
-let count = 0;
+let count = 1;
 function reset(){
+   // alert(count);
   for(let i=0;i<arr.length;i++){
        arr[i]=false;
       document.getElementById("i"+(i+1)).disabled=false;
       document.getElementById("i"+(i+1)).innerText="";
   }
-  count=0;
+  count=1;
+//  alert(count);
   // disable popup 
   popupRef.classList.add("hide");
   
@@ -35,7 +37,7 @@ function reset(){
 
 // function  executed when a player wins
 const win = (word) => {
-  count=0;
+//   count=0;
   //enable popup
   popupRef.classList.remove("hide");
   if (word == "X") {
@@ -48,7 +50,6 @@ const win = (word) => {
 //Function for draw
 const drawFunction = () => {
   
-  count=0;
   popupRef.classList.remove("hide");
   msgRef.innerHTML =" It's a Draw";
 
@@ -57,6 +58,7 @@ const drawFunction = () => {
 
 //Win Logic
 const winCheck = () => {
+  //  alert(count);
   count++;
   //traverse through all win options
   for (let i of winningOption) {
@@ -76,7 +78,8 @@ const winCheck = () => {
     }
     
   }
-  if(count>=9){ 
+  if(count>9){ 
+    // alert(count);
     drawFunction();
   } 
   
@@ -93,7 +96,7 @@ function start(btnId){
   // computer logic
  
   computer();
-  winCheck();
+//   winCheck();
   
 }
 
@@ -108,23 +111,26 @@ function player(btnId){
 }
 
 function computer(){
-
+    if(count<=8){
+        
+   
   while(true){
         
     let x=Math.floor(Math.random()*9)+1;
-    console.log(x);
+    // console.log(x);
     if(arr[x-1]==false){
       let text="i"+x;
       document.getElementById(text).innerText="O";
       arr[x-1]=true;// reserve the button position
       document.getElementById(text).disabled=true;
+      winCheck();
       break;
        
     }
-    if(count>9)
-      return;
+    
 
   }
+}
 
 }
 //Enable Buttons and disable on page load

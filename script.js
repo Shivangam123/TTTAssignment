@@ -58,6 +58,7 @@ const drawFunction = () => {
 
 //Win Logic
 const winCheck = () => {
+  let flag=false;
   //  alert(count);
   count++;
   //traverse through all win options
@@ -70,18 +71,20 @@ const winCheck = () => {
     //If 3 empty elements are same 
     if (element1 != "" && (element2 != "") && (element3 != "")) {
       if (element1 == element2 && element2 == element3) {
+        flag=true;
         //If all 3 buttons have same values then pass  value to win
         win(element1);
-        break;
+         break;
+       
         
       }
     }
-    
+    if(count>9&&flag===false ){ 
+      // alert(count);
+      drawFunction();
+    } 
   }
-  if(count>9){ 
-    // alert(count);
-    drawFunction();
-  } 
+  
   
 };
 
